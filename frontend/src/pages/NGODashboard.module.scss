@@ -1,0 +1,476 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.page { 
+  min-height: 100vh; 
+  padding-bottom: 2rem;
+}
+
+.header { 
+  @include container; 
+  padding: 28px 0 24px; 
+  
+  @include mobile-down {
+    padding: 20px 1rem 20px;
+  }
+}
+
+.welcomeSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  @include mobile-down {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+}
+
+.avatar {
+  background: linear-gradient(135deg, $primary-600, $primary-700) !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.sub { 
+  color: $muted; 
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+}
+
+.quickActions {
+  @include mobile-down {
+    width: 100%;
+    
+    button {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+}
+
+/* Stats Grid */
+.statsGrid {
+  @include container;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @include mobile-down {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+}
+
+.statCard {
+  background: $card;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: $shadow;
+  transition: transform $transition, box-shadow $transition;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+  
+  @include mobile-down {
+    padding: 1.25rem;
+  }
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.primary .statIcon {
+  background: linear-gradient(135deg, $primary-600, $primary-700);
+  color: white;
+}
+
+.success .statIcon {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.warning .statIcon {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.info .statIcon {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.statContent {
+  flex: 1;
+  
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 0.875rem;
+    color: $muted;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.statValue {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: $muted;
+}
+
+/* Tab Navigation */
+.tabNavigation {
+  @include container;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  
+  @include mobile-down {
+    padding: 0 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  color: $muted;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: $radius-sm $radius-sm 0 0;
+  cursor: pointer;
+  transition: all $transition;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  
+  &:hover {
+    color: $text;
+    background: rgba(255,255,255,0.04);
+  }
+  
+  &.active {
+    color: white;
+    border-bottom-color: $primary-600;
+    background: rgba(255,255,255,0.06);
+  }
+}
+
+/* Tab Content */
+.tabContent {
+  @include container;
+  
+  @include mobile-down {
+    padding: 0 1rem;
+  }
+}
+
+.sectionHeader {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  p {
+    color: $muted;
+    margin: 0;
+  }
+}
+
+/* Overview Tab */
+.overviewTab {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.chartSection {
+  .chartCard {
+    background: $card;
+    border: 1px solid rgba(255,255,255,0.08);
+    
+    :global(.ant-card-head) {
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      
+      .ant-card-head-title {
+        color: white;
+        font-weight: 600;
+      }
+    }
+    
+    :global(.ant-card-body) {
+      background: transparent;
+    }
+  }
+}
+
+.activitySection {
+  .activityCard {
+    background: $card;
+    border: 1px solid rgba(255,255,255,0.08);
+    
+    :global(.ant-card-head) {
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      
+      .ant-card-head-title {
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.activityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.9rem;
+    color: white;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: $muted;
+  }
+}
+
+.activityAmount {
+  font-weight: 700;
+  color: $accent;
+}
+
+/* Campaigns Tab */
+.tableCard {
+  background: $card;
+  border: 1px solid rgba(255,255,255,0.08);
+  
+  :global(.ant-card-body) {
+    padding: 0;
+  }
+}
+
+.campaignsTable {
+  :global(.ant-table) {
+    background: transparent;
+    
+    .ant-table-thead > tr > th {
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .ant-table-tbody > tr > td {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: transparent;
+      color: $text;
+    }
+    
+    .ant-table-tbody > tr:hover > td {
+      background: rgba(255,255,255,0.04) !important;
+    }
+  }
+}
+
+.campaignCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.campaignImage {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-sm;
+  object-fit: cover;
+}
+
+.campaignTitle {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.campaignCategory {
+  font-size: 0.75rem;
+  color: $muted;
+}
+
+.progressCell {
+  min-width: 150px;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  color: $muted;
+  margin-top: 0.25rem;
+}
+
+.donorCount {
+  font-weight: 600;
+  color: $accent;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* Donors Tab */
+.donorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  
+  @include mobile-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.donorCard {
+  background: $card;
+  border: 1px solid rgba(255,255,255,0.08);
+  
+  :global(.ant-card-body) {
+    padding: 1.25rem;
+  }
+}
+
+.donorHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: white;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: $muted;
+  }
+}
+
+.donorDetails {
+  text-align: center;
+}
+
+.donationAmount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: $accent;
+  margin-bottom: 0.25rem;
+}
+
+.campaignName {
+  font-size: 0.875rem;
+  color: $muted;
+}
+
+/* Campaign Modal */
+.campaignModal {
+  :global(.ant-modal-content) {
+    background: $card;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  
+  :global(.ant-modal-header) {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    
+    .ant-modal-title {
+      color: white;
+    }
+  }
+  
+  :global(.ant-modal-body) {
+    background: transparent;
+  }
+}
+
+.campaignForm {
+  :global(.ant-form-item-label) {
+    label {
+      color: white;
+    }
+  }
+  
+  :global(.ant-input), 
+  :global(.ant-input-number),
+  :global(.ant-select-selector) {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+  
+  :global(.ant-select-selection-placeholder) {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}

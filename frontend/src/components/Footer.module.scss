@@ -1,0 +1,28 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.footer {
+  margin-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02));
+}
+
+.inner {
+  @include container;
+  padding: 20px 0 28px;
+  display: grid;
+  gap: 8px;
+  text-align: center;
+  
+  @include mobile-down {
+    padding: 20px 1rem 24px;
+    gap: 6px;
+  }
+}
+
+.brand {
+  font-family: $font-display;
+  font-weight: 700;
+}
+
+.copy { color: $muted; margin: 0; }

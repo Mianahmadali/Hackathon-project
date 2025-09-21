@@ -1,0 +1,43 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.page { min-height: 100vh; }
+
+.header {
+  @include container;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.25rem;
+  padding: 28px 0 40px;
+  @media (max-width: 980px) { grid-template-columns: 1fr; }
+
+  img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: $radius-lg;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: $shadow;
+  }
+}
+
+.meta {
+  background: $card;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: $radius-lg;
+  padding: 16px;
+  box-shadow: $shadow;
+}
+
+.ngo { color: $muted; margin-top: -6px; }
+.desc { color: $muted; }
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  color: $muted;
+}
+
+.actions { margin-top: 12px; }
+
+.note { color: $muted; margin: 0; }

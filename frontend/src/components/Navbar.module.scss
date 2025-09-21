@@ -1,0 +1,186 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(11,16,32,0.85), rgba(11,16,32,0.6));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.inner {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  height: 64px;
+  position: relative;
+
+  @include mobile-down {
+    grid-template-columns: 1fr auto;
+    padding: 0 1rem;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-family: $font-display;
+  color: white;
+  svg { color: $primary-600; }
+  
+  @include mobile-down {
+    font-size: 1.1rem;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  
+  @include mobile-down {
+    display: none;
+  }
+  
+  a {
+    color: $muted;
+    font-weight: 600;
+    padding: 0.35rem 0.55rem;
+    border-radius: $radius-sm;
+    transition: color $transition, background $transition, transform $transition;
+    &:hover { color: $text; background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+  }
+}
+
+.active {
+  color: $text !important;
+  background: rgba(255,255,255,0.08);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+  
+  @include mobile-down {
+    display: none;
+  }
+}
+
+.login, .signup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border-radius: $radius-sm;
+}
+
+.login {
+  color: $muted;
+  border: 1px solid rgba(255,255,255,0.08);
+  &:hover { color: $text; background: rgba(255,255,255,0.06); }
+}
+
+.signup {
+  color: white;
+  background: linear-gradient(135deg, $primary-600, $primary-700);
+  border: 1px solid transparent;
+  &:hover { transform: translateY(-1px); }
+}
+
+.actionText {
+  @include mobile-down {
+    display: none;
+  }
+}
+
+/* Mobile Menu Button */
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: $text;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: background $transition, color $transition;
+  
+  @include mobile-down {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &:hover {
+    background: rgba(255,255,255,0.06);
+    color: white;
+  }
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(11,16,32,0.95), rgba(11,16,32,0.98));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 300ms ease, opacity 300ms ease, visibility 300ms ease;
+  z-index: 100;
+  
+  @include desktop-up {
+    display: none;
+  }
+}
+
+.mobileMenuOpen {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileLinks {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  a {
+    color: $muted;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: $radius-sm;
+    transition: all $transition;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &:hover, &.active {
+      color: $text;
+      background: rgba(255,255,255,0.08);
+    }
+    
+    &:last-child {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, $primary-600, $primary-700);
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, lighten($primary-600, 5%), lighten($primary-700, 5%));
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,327 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home {
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(79, 70, 229, 0.25), transparent 60%),
+              radial-gradient(900px 500px at 100% 20%, rgba(34, 197, 94, 0.15), transparent 60%),
+              $bg;
+  color: $text;
+  min-height: 100vh;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(72px, 10vw, 120px) 0 56px;
+  overflow: clip;
+  
+  @include mobile-down {
+    padding: clamp(80px, 12vw, 100px) 0 40px;
+  }
+}
+
+.heroContent {
+  @include container;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 2rem;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  @include mobile-down {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+}
+
+.badge {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: white;
+  background: linear-gradient(90deg, $primary-700, $primary-600);
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.08;
+  margin: 0 0 0.75rem;
+}
+
+.subtitle {
+  color: $muted;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.66;
+  margin: 0 0 1.5rem;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @include tablet-down {
+    justify-content: center;
+  }
+  
+  @include mobile-down {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    
+    > * {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+}
+
+.primaryCta,
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background $transition, border-color $transition, color $transition, transform $transition;
+}
+
+.primaryCta {
+  background: linear-gradient(135deg, $primary-600, $primary-700);
+  color: white;
+  &:hover { transform: translateY(-2px); }
+}
+
+.secondaryCta {
+  @include glass(0.5);
+  color: $text;
+  &:hover { background: rgba(255,255,255,0.08); }
+}
+
+.heroStats {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1.25rem;
+  width: fit-content;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include tablet-down {
+    margin-inline: auto;
+  }
+  
+  @include mobile-down {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.25rem auto 0;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  li {
+    @include glass(0.35);
+    border-radius: $radius-sm;
+    padding: 0.75rem 1rem;
+    display: grid;
+    place-items: start;
+    animation: fadeInUp 480ms ease both;
+
+    strong { font-size: 1.1rem; }
+    span { color: $muted; font-size: 0.9rem; }
+  }
+}
+
+.heroVisual {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(800px 300px at 70% 30%, rgba(79, 70, 229, 0.25), transparent 60%),
+              radial-gradient(700px 260px at 30% 80%, rgba(34, 197, 94, 0.18), transparent 60%);
+  mask-image: radial-gradient(60% 60% at 50% 40%, black 40%, transparent 100%);
+}
+
+/* Featured Campaigns */
+.campaignsSection {
+  padding: 24px 0 64px;
+  
+  @include mobile-down {
+    padding: 20px 0 48px;
+  }
+}
+
+.sectionHeader {
+  @include container;
+  margin-bottom: 1rem;
+  h2 {
+    font-size: clamp(1.35rem, 3.2vw, 1.8rem);
+    margin: 0 0 0.3rem;
+  }
+  p { color: $muted; margin: 0; }
+}
+
+.grid {
+  @include container;
+  @include grid(280px);
+}
+
+.card {
+  background: $card;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow;
+  display: flex;
+  flex-direction: column;
+  @include hover-float;
+}
+
+.cardMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform $transition ease;
+  }
+
+  .category {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+  }
+
+  &:hover img { transform: scale(1.04); }
+}
+
+.cardBody {
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.cardTitle { margin: 2px 0 0; font-size: 1.05rem; }
+.cardNgo { margin: 0; color: $muted; font-size: 0.92rem; }
+
+.progressBar {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $accent, lighten($accent, 10%));
+  border-radius: inherit;
+  transition: width 380ms ease;
+}
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  color: $muted;
+  font-size: 0.9rem;
+}
+
+.raised { color: white; font-weight: 600; }
+
+.cardActions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.donateBtn {
+  background: linear-gradient(135deg, $primary-600, $primary-700);
+  color: white;
+  border: none;
+  border-radius: $radius-sm;
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform $transition, box-shadow $transition;
+  &:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(67, 56, 202, 0.4); }
+}
+
+.detailsLink {
+  color: $muted;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.45rem 0.6rem;
+  border-radius: $radius-sm;
+  transition: color $transition, background $transition, transform $transition;
+  &:hover { color: $text; background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+}
+
+/* How it Works */
+.howSection {
+  padding: 16px 0 72px;
+}
+
+.howGrid {
+  @include container;
+  @include grid(240px);
+}
+
+.howCard {
+  @include glass(0.35);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: $radius-md;
+  padding: 18px 16px;
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  animation: fadeInUp 520ms ease both;
+  @include hover-float;
+
+  h3 { margin: 6px 0 0; font-size: 1.05rem; }
+  p { margin: 0; color: $muted; line-height: 1.6; }
+}
+
+.howIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  background: rgba(79, 70, 229, 0.18);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  color: white;
+}
